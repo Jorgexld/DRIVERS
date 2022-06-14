@@ -24,6 +24,21 @@
 #ifndef DRIVERS_DRIVERS_UART_H_
 #define DRIVERS_DRIVERS_UART_H_
 
+#pragma once
+
+#define __MSP432P401R__
+#define  __SYSTEM_CLOCK 48000000 // Frecuencias funcionales recomendadas: 12, 24 y 48 Mhz.
+
+/* Archivos de cabecera importantes. */
+#include <unistd.h>
+#include <stdint.h>
+#include <stddef.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ti/devices/msp432p4xx/inc/msp.h>
+
 ///////////////////////////////////////////////////////////////////////////////
 // DEFINICIONES ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
@@ -58,6 +73,7 @@
 #define SINCRONO 1
 
 #define Numero_de_Baudajes 7
+#define MAIN_UART (uint32_t)(EUSCI_A0)
 
 /* Uso de pines UART 1.1 y 1.2. */
 #define Pines_Puerto_1 (0x0001 << 2 | 0x0001 << 3)
@@ -71,7 +87,7 @@
 #define EUSCI_B_CMSIS(x) ((EUSCI_B_Type *) x)
 
 ///////////////////////////////////////////////////////////////////////////////
-// ENUMS PARA LAS OPCIONES DE BAUDAJE Y PARIEDAD //////////////////////////////
+// ENUMS PARA LAS OPCIONES DE BAUDAJE Y PARIDAD //////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
 // Enum que habilita los posibles tipos de reloj como opciones.
@@ -94,13 +110,13 @@ typedef enum
    Baudaje_460800
 }  Baudaje;
 
-// Enum que habilita las posibles pariedades como opciones.
+// Enum que habilita las posibles Paridades como opciones.
 typedef enum
 {
-   SIN_PARIEDAD = 0,
+   SIN_PARIDAD = 0,
    IMPAR,
    PAR
-} Pariedad;
+} Paridad;
 
 ///////////////////////////////////////////////////////////////////////////////
 // CONFIGURACION DEL MODULO ///////////////////////////////////////////////////
@@ -125,7 +141,7 @@ void UART_Interrupcion_CErroneos(bool Interrupcion_CErroneos);
 void UART_Sobremuestreo(bool Sobremuestreo);
 
 // Determina la paridad.
-void UART_Pariedad(char Pariedad);
+void UART_Paridad(char Paridad);
 
 // Determina si habrá uno o dos bits de paro en la comunicación.
 void UART_Bits_de_Paro(bool Bits_de_Paro);

@@ -21,7 +21,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "HVAC.h" // Configuración del sistema.
+#include "Drivers_UART.h" // Configuración del sistema.
 
 // Constantes de baudaje considerando 12MHz.
 const uint32_t BRX[]  = {78, 39, 19, 13, 6, 3, 1}; // Constantes UCBRx.
@@ -151,17 +151,17 @@ void UART_Sobremuestreo(bool Sobremuestreo)
 
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
-// - Funcion: UART_Pariedad
+// - Funcion: UART_Paridad
 // - Precondiciones: Ninguna.
-// - Resumen: Determina el tipo de pariedad, sin pariedad, par o impar mediante un char de un enum.
-// - Entradas: Char "Pariedad" del enum Pariedad del archivo header que indique el tipo de pariedad.
+// - Resumen: Determina el tipo de Paridad, sin Paridad, par o impar mediante un char de un enum.
+// - Entradas: Char "Paridad" del enum Paridad del archivo header que indique el tipo de Paridad.
 // - Salidas: Ninguna.
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-void UART_Pariedad(char Pariedad)
+void UART_Paridad(char Paridad)
 {
-    if(Pariedad > 0)
+    if(Paridad > 0)
     {
         EUSCI_A_CMSIS(EUSCI_A0) -> CTLW0 |= UCPEN;
         EUSCI_A_CMSIS(EUSCI_A0)-> CTLW0 &= ~UCPAR;
@@ -280,7 +280,7 @@ void UART_Inicializar(void)
     UART_Bits_de_Paro(UN_BIT_DE_PARO); // A la función UART_Bits_de_Paro se le manda un UN_BIT_DE_PARO, el cual esta definido
                                        // como 0.
 
-    UART_Pariedad(SIN_PARIEDAD); // A la funcion UART_Pariedad se le manda un SIN_PARIEDAD, el cual según su órden en el enum
+    UART_Paridad(SIN_PARIDAD); // A la funcion UART_Paridad se le manda un SIN_PARIDAD, el cual según su órden en el enum
                                  // está definido con un 0.
 
 
@@ -288,7 +288,7 @@ void UART_Inicializar(void)
                                             // en el enum está definido con un 4, lo cual servirá para los arreglos declarados
                                             // de BRX, BRS y BRFX.
 
-    UART_Bits_de_Datos(OCHO_BITS); // A la funcion UART_Bits_de_Datos se le manda un SIN_PARIEDAD, el cual está definido como
+    UART_Bits_de_Datos(OCHO_BITS); // A la funcion UART_Bits_de_Datos se le manda un SIN_PARIDAD, el cual está definido como
                                    // un 0.
 
     UART_Sincronia(ASINCRONO); // A la funcion UART_Sincronia se le manda un ASINCRONO, el cual está definido con un 0.
