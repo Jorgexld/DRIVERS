@@ -1,5 +1,4 @@
-// FileName:        Main.c
-// Dependencies:    Drivers_UART.h
+// FileName:        UART.c
 // Processor:       MSP432
 // Board:           MSP432P401R
 // Program version: 11.1.0.00011
@@ -23,15 +22,6 @@
 
 #include "Drivers/Drivers_UART.h"
 
-int i=0;
-
-int main(void)
-{
+void UART_INIT(void){
     UART_Inicializar();
-
-    while(1){
-        UART_putsf(MAIN_UART,"Hola desde los drivers de la UART\n\r");
-
-        for(i=0; i<3000000; i++){}
-    }
 }

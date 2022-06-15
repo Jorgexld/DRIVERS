@@ -176,4 +176,8 @@ void UART_putsf(uint32_t Modulo_UART, char *s);
 
 ///////////////////////////////////////////////////////////////////////////////
 
+// Se encargan de invocar e imprimir mensajes en la UART
+void UART_INIT(void);
+void UART_MESSAGE(void);
+
 #endif /* DRIVERS_DRIVERS_UART_H_ */
